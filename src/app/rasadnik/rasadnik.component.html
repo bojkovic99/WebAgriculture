@@ -1,0 +1,296 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+            <a routerLink="/login">Odjava</a> |
+            <a routerLink='/promena'>Promeni šifru</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+                <button class="btn btn-link link" (click)='vratise()'> Prikaz svh rasadnika </button>
+                <button class="btn btn-link link" (click)='prikazivanje=3'>Magacin </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<span *ngIf='prikazivanje!=3'>
+    <div class='container-fluid pozadina'>
+        <div class="row ">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-3 karta">
+                <div class="card-body">
+                    <div class="card karta">
+                        <div class="media">
+
+
+                            <img src="../../assets/sunce1.png " class="mr-3 maleslike" alt='Generic placeholder image'>
+                            <div class='media-body'>
+                                <h5 class="mt-0">Temperatura </h5>
+                                <br>
+                                &nbsp;<span class="broj">{{rasadnik.Temperatura}} °C</span>
+                                <br>
+                                <br>
+                                &nbsp; <button class="btn btn-success" aria-setsize="10" (click)="atempp()"> + </button>
+                                &nbsp;&nbsp;
+                                <button class="btn btn-danger" aria-setsize="10" (click)="atemps()"> – </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4 karta">
+                <div class="card-body">
+                    <div class="card karta">
+                        <div class="media">
+
+
+                            <img src="../../assets/kapljica2.png" class="mr-3 maleslike"
+                                alt='Generic placeholder image'>
+                            <div class='media-body'>
+                                <h5 class="mt-0">Količina vode </h5>
+                                <br>
+                                &nbsp;<span class="broj">{{rasadnik.Voda}} l</span>
+                                <br>
+                                <br>
+                                &nbsp;<button class="btn btn-success" (click)="avodap()">+</button> &nbsp;&nbsp;
+                                <button class="btn btn-danger" (click)="avodas()">&ndash;</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-2" *ngIf='zaprikazivanje==1'>
+
+
+                <span align="right">
+                    <div class="card text-white bg-danger mb-3" style="padding-bottom: 0px; max-width: 185px ">
+                        <div class="card-body">
+                            Rasadniku je potrebno odrzavanje!
+                        </div>
+                    </div>
+
+
+
+
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 " align="center">
+
+                <table>
+
+                    <span *ngFor='let a of sirina; let i=index'>
+
+                        <tr *ngFor='let b of duzina'>
+
+                            <td>
+
+                                <span *ngIf='nalazise[b*si+a]==0'>
+                                    <img src="../../assets/zemljaKonacno1.png" alt='Card image' id="{{b*si+a}}"
+                                        (click)="dodajNovu($event)">
+                                    <div class="modal" id="mojModal" [style.display]="prikazi ? 'block' : 'none'">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        (click)="hide()" align="right">&times;</button>
+                                                    Dodaj novu sadnicu
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                                                        (click)="skokMagacin()">Dodaj</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                        (click)="hide()">Zatvori</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </span>
+
+                                <span *ngIf='nalazise[b*si+a]==1'>
+
+                                    <img src="../../assets/malaSadnicakonacno.png" alt='Card imaged' id="{{b*si+a}}"
+                                        (click)="onClick($event)">
+
+                                    <div class="modal bd-example-modal-sm " id="myModal"
+                                        [style.display]="showModal ? 'block' : 'none'">
+                                        <div class=" modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        (click)="hide()" align="right">&times;</button>
+                                                    <p>Naziv: {{sadnica.Naziv}}</p>
+                                                    <p>Proizvodjac: {{sadnica.Proizvodjac}}</p>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-striped bg-success"
+                                                            role="progressbar" aria-valuenow="progres" aria-valuemin="0"
+                                                            aria-valuemax="100" [style.width.%]=" progres">
+                                                            {{sadnica.Napredak}} / {{sadnica.Presadjivanje}}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                                                        (click)="mag()">Dodaj
+                                                        preparate</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                        (click)="hide()">Zatvori</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                </span>
+                                <span *ngIf='nalazise[b*si+a]==2'>
+
+                                    <img src="../../assets/presadjivanje.png" alt='Card imaged' id="{{b*si+a}}"
+                                        (click)="presad3($event)">
+                                    <div class="modal" id="mojModall" [style.display]="presad ? 'block' : 'none'">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal body -->
+
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        (click)="hide()" align="right">&times;</button>
+                                                    Sadnica je spremna za presađivanje
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                                                        (click)="presadiSadnicu(b*si+a)">Presadi
+                                                        sadnicu</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                        (click)="hide()">Zatvori</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                                <span *ngIf='nalazise[b*si+a]==3'>
+
+                                    <img src="../../assets/zemljaKonacno1.png" alt='Card imaged4' id="{{b*si+a}}"
+                                        (click)="presad4($event)">
+                                    <div class="modal" id="mojModalll" [style.display]="presad2 ? 'block' : 'none'">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        (click)="hide()" align="right">&times;</button>
+                                                    Trenutno nije moguće dodati sadnicu
+                                                </div>
+
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                        (click)="hide()">Zatvori</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+
+                            </td>
+                        </tr>
+                    </span>
+
+                </table>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</span>
+<span *ngIf='prikazivanje==3'>
+    <div class="container-fluid pozadina">
+        <span class="spusteno">
+            <app-magacin tip="m" broj=0></app-magacin>
+            <div class="row">
+                <div class="col md-10">
+                    <div class="text-right">
+                        <div class="media">
+                            <div class='media-body'>
+
+
+                                &nbsp;
+
+                            </div>
+                            <img src="../../assets/ikonica.png " class="align-selt-end ml-3 maleslike"
+                                alt='Generic placeholder image' (click)="prikazivanje=1"> &nbsp; &nbsp; &nbsp; &nbsp;
+                            <img src="../../assets/kolica2.png " class="align-selt-end ml-3 maleslike"
+                                alt='Generic placeholder image' (click)='skokProdavnica()'>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </span>
+    </div>
+</span>
+
+
+<span *ngIf='prikazivanje==4'>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="modal prozor " tabindex="-1" role="dialog" id="moojModal"
+                    [style.display]="magacini ? 'block' : 'none'">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content prozor2">
+                            <!-- Modal body -->
+                            <div class="modal-body telo2 ">
+
+
+                                <app-magacin [tip]='otvaranje' [broj]='id'> </app-magacin>
+
+                            </div>
+
+
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                (click)="zatvori()">Zatvori</button>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</span>

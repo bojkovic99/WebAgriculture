@@ -1,0 +1,293 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
+<!-- <script src="https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script> -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+            <a routerLink="/login">Odjava</a> |
+            <a routerLink='/promena'>Promeni šifru</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <button class="btn btn-link link" (click)="prikaz=1;grafi=0">Prikaz narudžbina</button>
+        <button class="btn btn-link link" (click)="prikaz=2;grafi=0">Prikaz svih proizvoda</button>
+        <button class="btn btn-link link" (click)="prikaz=3;grafi=0">Dodaj novi proizvod</button>
+        <button class="btn btn-link link" (click)="grafi=1;prikaz=0">Rezultati poslovanja</button>
+
+
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-1'>
+        </div>
+        <div class="col-md-10 spusteno">
+            <span *ngIf='prikaz==1'>
+
+                <table class="table table-md">
+                    <thead class="thead-dark">
+                        <th>Naziv</th>
+                        <th>Količina</th>
+                        <th>Datum</th>
+                        <th> </th>
+                        <th> </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let a of narudzbine; let i=index'
+                            [style.background-color]="a.NaCekanju>=1? 'pink' : 'rgb(235, 212, 171)' ">
+                            <td>
+                                {{a.Naziv}}
+                            </td>
+                            <td>{{a.Kolicina}}</td>
+                            <td>
+                                {{a.Datum}}
+                            </td>
+                            <td *ngIf='a.NaCekanju==0'>
+                                <button class="btn btn-success" (click)='prihvati(i)'>Prihvati</button>
+                            </td>
+                            <td *ngIf='a.NaCekanju!=0'>
+                                <button class="btn btn-secondary" (click)='prihvati(i)'>Na čekanju</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)='odbaci(i)'>Odbaci</button>
+                            </td>
+                        </tr>
+                        <button class="btn btn-secondary" (click)='sortiraj()'>Sortirano</button> &nbsp; &nbsp; &nbsp;
+                        <button class="btn btn-secondary" (click)='sortirajNemoj()'>Nije sortirano</button>
+
+                    </tbody>
+
+                </table>
+
+
+            </span>
+            <span *ngIf='prikaz==2'>
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <th>Naziv</th>
+                        <th>Tip</th>
+                        <th> Osobina </th>
+                        <th> </th>
+                        <th> </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let a of mojiproizvodi; let i=index'>
+                            <td>
+                                {{a.Naziv}}
+                            </td>
+                            <td>
+                                {{a.Tip=='s'?'Sadnica':'Preparat'}}
+                            </td>
+                            <td>
+                                {{a.Napredak ? a.Napredak:a.Presadjivanje  }}
+                            </td>
+
+
+                            <td> <button class="btn btn-danger" (click)='povuci(i)'>Ukloni</button> </td>
+                            <td>
+                                <button class="btn btn-link" (click)='detaljno(i)'>Link</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+
+            </span>
+            <span *ngIf='prikaz==3'>
+
+
+                <div class="bs-stepper">
+                    <div class="bs-stepper-header">
+                        <div [className]="tabovi[0]==1?'stepactive' : 'step' " data-target="#test-l-1">
+
+                            <span class="bs-stepper-circle">
+                                <i class="fa fa-leaf"></i>
+                            </span>
+
+                            <span class="bs-stepper-label" style="color: black;">Naziv</span>
+                            <span style="align-items: center;">
+                                <!--  <div class="tab" [style.display]="tabovi[0]==1?'inline' : 'none'  ">
+                                <input type="text" [(ngModel)]='naziv' name="naziv">
+                                <button (click)='showtab(1)'>Dalje</button>
+
+                            </div> -->
+                            </span>
+                        </div>
+                        <div class="line"></div>
+                        <div [className]="tabovi[1]==1? 'stepactive' : 'step' " data-target="#test-l-2">
+
+                            <span class="bs-stepper-circle">2</span>
+                            <span class="bs-stepper-label">Tip</span>
+
+
+                        </div>
+                        <div class="line"></div>
+                        <div [className]="tabovi[2]==1?'stepactive' : 'step' " data-target="#test-l-3">
+
+                            <span class="bs-stepper-circle">3</span>
+                            <span class="bs-stepper-label">Osobina</span>
+
+
+                        </div>
+                        <div class="line"></div>
+                        <div [className]="tabovi[3]==1?'stepactive' : 'step' " data-target="#test-l-2">
+
+                            <span class="bs-stepper-circle">4</span>
+                            <span class="bs-stepper-label">Kolicina</span>
+
+
+                        </div>
+                        <div class="line"></div>
+                        <div [className]="tabovi[4]==1?'stepactive' : 'step' " data-target="#test-l-2">
+
+                            <span class="bs-stepper-circle">5</span>
+                            <span class="bs-stepper-label">Cena</span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <div class="bs-stepper-content">
+                        <div id="test-l-1" [style.display]="tabovi[0]==1?'inline' : 'none'">
+                            <div class="text-center" style="padding: 100px;">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td>Naziv
+                                            <input type="text" [(ngModel)]='naziv' name="naziv"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <button (click)='showtab(1)' class="btn btn-secondary">Dalje</button></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                        <div id="test-l-2" [style.display]="tabovi[1]==1?'inline' : 'none'">
+                            <div class="text-center" style="padding: 100px;">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td>Tip
+                                            <input type="radio" [(ngModel)]='tip' name="tip" value="s">Sadnica
+                                            <input type="radio" [(ngModel)]='tip' name="tip" value="p">Preparat
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp; <button (click)='showtab(0)'
+                                                class="btn btn-secondary">Prethodno</button> &nbsp;
+                                            <button (click)='showtab(2)' class="btn btn-secondary">Dalje</button></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+                        <div id="test-l-3" [style.display]="tabovi[2]==1?'inline' : 'none'">
+
+                            <div class="text-center" style="padding: 100px;">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td>Osobina <input type="number" [(ngModel)]='osobina' name="osobina"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;&nbsp; <button (click)='showtab(1)'
+                                                class="btn btn-secondary">Prethodno</button> &nbsp;
+                                            <button (click)='showtab(3)' class="btn btn-secondary">Dalje</button></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="test-l-4" [style.display]="tabovi[3]==1?'inline' : 'none'">
+
+                            <div class="text-center" style="padding: 100px;">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td>Količina <input type="number" [(ngModel)]='koli' name="koli"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp; <button (click)='showtab(2)'
+                                                class="btn btn-secondary">Prethodno</button> &nbsp;
+                                            <button (click)='showtab(4)' class="btn btn-secondary">Dalje</button></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="test-l-5" [style.display]="tabovi[4]==1?'inline' : 'none'">
+
+                            <div class="text-center" style="padding: 100px;">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td>Cena <input type="number" [(ngModel)]='cen' name="cen"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp; <button (click)='showtab(3)'
+                                                class="btn btn-secondary">Prethodno</button> &nbsp;
+                                            <button class="btn btn-success" (click)='dodajUProd()'>Dodaj</button> </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <span class="poruka" [style.display]="1?'inline' : 'none'"> {{poruka}} </span>
+                    </div>
+                </div>
+
+
+
+            </span>
+
+
+
+        </div>
+    </div>
+</div>
+
+<span *ngIf='grafi==1'>
+    <app-dijagram></app-dijagram>
+</span>
+
+<footer id="footer" align="center">
+    <div class="container" style="height: 100%;">
+        <div class="row">
+            <div class="col-sm-6"
+                style="color: rgb(161, 161, 161); padding-bottom: 0cm; float:inline-end; bottom: 0px; height: 100%; ">
+                @Elektrotehnicki fakultet Univerziteta u Beogradu
+            </div>
+
+        </div>
+    </div>
+</footer>

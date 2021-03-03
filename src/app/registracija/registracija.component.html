@@ -1,0 +1,183 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+            <a routerLink="/login">Odjava</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-6'>
+            <form>
+                <button class="btn btn-link link" (click)='pred()'>Registuj se kao Preduzeće</button>
+                <button class="btn btn-link link" (click)='polj()'>Registuj se kao Poljoprivrednik</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class='container-fluid pozadina'>
+
+    <div class="row ">
+        <div class="col-lg-3"></div>
+        <div class='col-lg-6'>
+            <form>
+                <span *ngIf="tip=='p'">
+                    <table class="table  table-sm">
+                        <tr>
+                            <td>Pun naziv preduzeća</td>
+                            <td>
+                                <input class="form-control" type="text" name="ppunoime" [(ngModel)]="ppunoime" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Skraćeni naziv</td>
+                            <td>
+                                <input class="form-control" type="text" name="pusername" [(ngModel)]="pusername"
+                                    required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lozinka</td>
+                            <td>
+                                <input class="form-control" type="password" name="psifra1" [(ngModel)]="psifra1"
+                                    required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Potvrda lozinke</td>
+                            <td>
+                                <input class="form-control" type="password" name="psifra2" [(ngModel)]="psifra2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Datum osnivanja</td>
+                            <td>
+                                <input class="form-control" type="date" name="pdatum" [(ngModel)]="pdatum">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesto</td>
+                            <td>
+                                <input class="form-control" type="string" name="pmesto" [(ngModel)]="pmesto">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input class="form-control" type="email" name="pmail" [(ngModel)]="pmail" email>
+                            </td>
+                        </tr>
+                        <tr align="right">
+                            <td></td>
+                            <td> <button (click)="registruj()" class="btn btn-secondary" align="right">Registruj
+                                    se</button></td>
+
+                        </tr>
+                    </table>
+                    <span style="padding-top: 50px;">
+                        <re-captcha (resolved)="resolved($event)" siteKey="6LcLB_EUAAAAAJrmv6VlrabiKBwkIBb8SulOenNL">
+                        </re-captcha>
+                    </span>
+                </span>
+
+
+                <span *ngIf="tip=='k'">
+                    <table class="table  table-sm">
+                        <tr>
+                            <td>Ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kime" [(ngModel)]="kime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prezime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kprezime" [(ngModel)]="kprezime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Korisničko ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kusername" [(ngModel)]="kusername">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lozinka</td>
+                            <td>
+                                <input class="form-control" type="password" name="ksifra1" [(ngModel)]="ksifra1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Potvrda lozinke</td>
+                            <td>
+                                <input class="form-control" type="password" name="ksifra2" [(ngModel)]="ksifra2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Datum rođenja</td>
+                            <td>
+                                <input class="form-control" type="date" name="datum" [(ngModel)]="kdatum">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesto rodjenja</td>
+                            <td>
+                                <input class="form-control" type="string" name="mesto" [(ngModel)]="kmesto">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Telefon</td>
+                            <td>
+                                <input class="form-control" type="tel" name="telefon" [(ngModel)]="ktelefon">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input class="form-control" type="email" name="mail" [(ngModel)]="kmail">
+                            </td>
+                        </tr>
+                        <tr align="right">
+                            <td></td>
+                            <td> <button (click)="registruj()" class="btn btn-secondary" align="right">Registruj
+                                    se</button></td>
+
+                        </tr>
+                    </table>
+                    <span style="padding-top: 50px;" align="center">
+                        <re-captcha (resolved)="resolved($event)" siteKey="6LcLB_EUAAAAAJrmv6VlrabiKBwkIBb8SulOenNL">
+                        </re-captcha>
+                    </span>
+                </span>
+
+
+                <span class="poruka">
+                    {{msg}}
+                </span>
+                <span class="uspeh">
+                    {{poruka}}
+                </span>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer" align="center">
+    <div class="container" style="height: 100%;">
+        <div class="row">
+            <div class="col-sm-6"
+                style="color: rgb(161, 161, 161); padding-bottom: 0cm; float:inline-end; bottom: 0px; height: 100%; ">
+                @Elektrotehnicki fakultet Univerziteta u Beogradu
+            </div>
+
+        </div>
+    </div>
+</footer>

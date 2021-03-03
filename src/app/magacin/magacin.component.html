@@ -1,0 +1,158 @@
+<div class="container-fluid">
+    <div class="row spusteno">
+        <div class="col-md-12">
+            <span *ngIf="izaberi!='m'">
+
+
+
+
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <th>Naziv</th>
+                        <th>Proizvođač</th>
+                        <th>Količina</th>
+                        <th>Osobina</th>
+                        <th> </th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+
+
+                        <tr *ngFor='let a of proizvodi;let i=index'>
+                            <td *ngIf="a.Pristiglo=='y'"> {{a.Naziv}} </td>
+                            <td *ngIf="a.Pristiglo=='y'"> {{a.Proizvodjac}} </td>
+                            <td *ngIf="a.Pristiglo=='y'"> {{a.KolicinaM}} </td>
+                            <td *ngIf="a.Tip=='s' && a.Pristiglo=='y'" align="center" style="text-align: center;">
+                                {{a.Presadjivanje}}
+
+                            </td>
+                            <td *ngIf="a.Tip=='p' && a.Pristiglo=='y'" style="text-align: center;">
+                                {{a.Napredak}}
+                            </td>
+
+
+                            <td *ngIf="a.Tip=='s' && a.Pristiglo=='y'   ">
+                                <button class="btn btn-secondary" [disabled]="a.KolicinaM<=0 || izaberi=='s' "
+                                    (click)='dodaj(i)' align="center">Dodaj sadnicu</button>
+                            </td>
+                            <td *ngIf="a.Tip=='p' && a.Pristiglo=='y' ">
+                                <button class="btn btn-secondary" [disabled]=" a.KolicinaM<=0 || izaberi=='p'"
+                                    (click)='uvecaj(i)' align="center">Dodaj preparat</button>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+            </span>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <span *ngIf="izaberi=='m'">
+
+        <div class="row spusteno ">
+
+
+            <div class="col-md-3">
+                <form>
+                    Sortiranje <select #classOption class="form-control" name="Sortiraj:" value="sortiranje"
+                        (change)="sortiraj($event)">
+
+                        <option *ngFor="let class of classes;let i=index" [value]="class" id='{{i}}'>{{class}}</option>
+                    </select><br>
+                </form>
+            </div>
+            <div class="col-md-1"> </div>
+            <div class="col-md-3">
+                <form>
+                    Filtriranje
+                    <select #classOption class="form-control" name="Filtriraj:" value="filtriranje"
+                        (change)="filtriranje($event)">
+                        <option *ngFor="let class of classes" [value]="class">{{class}}</option>
+
+                    </select>
+
+                </form>
+            </div>
+            <div class="col-md-4">
+                <span *ngIf='filt > 0'>
+                    <form>
+                        <br>
+                        <input type="text" class="form-control" [(ngModel)]='trazeno' name="trazeno"
+                            placeholder="Unesite tekst za pretragu">
+
+                    </form>
+                </span>
+            </div>
+            <div class="col-md-1">
+                <span *ngIf='filt > 0'>
+                    <form>
+                        <br>
+                        <button class="btn btn-secondary" (click)="trazi()">Pretrazi</button>
+                    </form>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-sm table-striped spusteno">
+                    <thead class="thead-dark">
+                        <th>Naziv</th>
+                        <th>Proizvođač</th>
+                        <th>Količina</th>
+                        <th>Osobina</th>
+                        <th> </th>
+                        <th> </th>
+                    </thead>
+                    <tbody id="mojatabela">
+
+
+
+                        <tr *ngFor='let a of proizvodi;let i=index'>
+                            <td> {{a.Naziv}} </td>
+                            <td> {{a.Proizvodjac}} </td>
+                            <td> {{a.KolicinaM}} </td>
+                            <td *ngIf="a.Tip=='s'" style="text-align: center;">
+                                {{a.Presadjivanje}}
+
+                            </td>
+                            <td *ngIf="a.Tip=='p'" style="text-align: center;">
+                                {{a.Napredak}}
+                            </td>
+
+
+                            <td *ngIf="a.Pristiglo=='n'  ">
+                                <button class="btn btn-secondary" (click)='otkazii(i)' align="center">Otkazi</button>
+                            </td>
+                            <td *ngIf="a.Pristiglo=='y'  ">
+                                <span> </span>
+                            </td>
+                            <td *ngIf="a.Pristiglo=='d'  ">
+                                <span> </span>
+                            </td>
+                            <td *ngIf="a.Pristiglo=='n'  " style="background-color: rgb(250, 211, 104);">
+                                * Nije pristiglo
+                            </td>
+                            <td *ngIf="a.Pristiglo=='y'  ">
+                                <span> </span>
+                            </td>
+                            <td *ngIf="a.Pristiglo=='d'  " style="background-color: rgb(253, 233, 177);">
+                                * Dostava u toku
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </span>
+
+</div>

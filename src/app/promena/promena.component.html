@@ -1,0 +1,74 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+            <a routerLink="/login">Odjava</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina' align="center">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class='col-lg-6 spusteno'>
+            <form>
+                <table class="table ">
+                    <tr>
+                        <td>
+                            Unesite staru Lozinku:
+                        </td>
+                        <td>
+                            <input type="password" class="form-control" [(ngModel)]='stara' name="stara">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Unesite novu Lozinku:
+                        </td>
+                        <td>
+                            <input type="password" class="form-control" [(ngModel)]='ksifra1' name="ksifra1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Potvrdite novu Lozinku:
+                        </td>
+                        <td>
+                            <input class="form-control" type="password" [(ngModel)]='ksifra2' name="sifra4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <input type="button" class="btn btn-secondary" value="Promeni šifru" (click)="konacno()">
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+
+            <span class="poruka"> {{poruka}}</span>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<footer id="footer" align="center">
+    <div class="container" style="height: 100%;">
+        <div class="row">
+            <div class="col-sm-6"
+                style="color: rgb(161, 161, 161); padding-bottom: 0cm; float:inline-end; bottom: 0px; height: 100%; ">
+                @Elektrotehnicki fakultet Univerziteta u Beogradu
+            </div>
+
+        </div>
+    </div>
+</footer>

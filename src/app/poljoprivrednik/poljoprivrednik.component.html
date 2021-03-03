@@ -1,0 +1,126 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+            <a routerLink="/login">Odjava</a> |
+            <a routerLink='/promena'>Promeni šifru</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <button class="btn btn-link link" (click)='ras()'>Prikaz rasadnika</button>
+            <button class="btn btn-link link" (click)='dodaj()'>Dodaj rasadnik</button>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row" *ngIf='prikaz==1'>
+        <div class='col-md-1'>
+        </div>
+        <div class="col-md-10 spusteno">
+            <table class="table">
+                <thead class="thead-dark">
+                    <th>Id</th>
+                    <th>Naziv</th>
+                    <th>Mesto</th>
+                    <th>Broj sadnica</th>
+                    <th>Slobodne sadnice</th>
+                    <th>Količina vode</th>
+                    <th>Temperatura</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let a of rasadnici; let i=index'>
+                        <td>{{i+1}}</td>
+                        <td>{{a.Naziv}}</td>
+                        <td>{{a.Mesto}} </td>
+                        <td>{{a.Zasadjeno}}</td>
+                        <td>{{a.Duzina*a.Sirina-a.Zasadjeno}} </td>
+                        <td>{{a.Voda}}</td>
+                        <td>{{a.Temperatura}} </td>
+                        <td><button class="btn btn-secondary" (click)='prikazi(rasadnici[i])'>Prikaz</button> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row" *ngIf='prikaz==1'>
+        <div class='col-md-12'>
+            <table align="right">
+                <tr *ngFor='let a of niz'>
+                    <td>
+                        <div class="card text-white bg-danger mb-3" style="padding-bottom: 0px; max-width: 185px ">
+                            <div class="card-body">
+                                Rasadniku sa rednim brojem {{a+1}} je potrebno održavanje
+                            </div>
+                        </div>
+                    </td>
+
+
+                </tr>
+
+
+
+            </table>
+        </div>
+    </div>
+
+    <div class="row" *ngIf='prikaz==2'>
+        <div class="col-mg-4"></div>
+        <div class='col-md-4'>
+            <form>
+                <table class="table">
+                    <tr>
+                        <td>Naziv rasadnika</td>
+                        <td>
+                            <input type="text" name="naziv" [(ngModel)]='naziv'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mesto rasadnika</td>
+                        <td>
+                            <input type="text" name="mesto" [(ngModel)]='mesto'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Duzina</td>
+                        <td>
+                            <input type="text" name="duz" [(ngModel)]='duz'>m<sup>2</sup>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sirina</td>
+                        <td>
+                            <input type="text" name="sir" [(ngModel)]='sir'> m<sup>2</sup>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="left">
+                            <input type="button" class="btn btn-secondary" value="Dodaj" (click)='registruj()'>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+            </form>
+            <span style="color: green; font-weight: bold; ">{{poruka}}</span>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" align="center">
+    <div class="container" style="height: 100%;">
+        <div class="row">
+            <div class="col-sm-6"
+                style="color: rgb(161, 161, 161); padding-bottom: 0cm; float:inline-end; bottom: 0px; height: 100%; ">
+                @Elektrotehnicki fakultet Univerziteta u Beogradu
+            </div>
+
+        </div>
+    </div>
+</footer>

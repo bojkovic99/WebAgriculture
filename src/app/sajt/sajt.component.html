@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"> {{proizvodi.Naziv}} </h1>
+    <p class="lead"> {{proizvodi.Tip=='s'? 'Sadnica' : 'Preparat'}} preduzeća {{proizvodi.Proizvodjac}} </p>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <table class="table" style="width: 350px;">
+        <tr>
+          <td><i class="fa fa-industry" style="color: rgb(0, 204, 255);"></i></td>
+          <td colspan="7">
+            {{proizvodi.Proizvodjac}}
+          </td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-leaf" style="color: rgb(0, 204, 255);"></i></td>
+          <td colspan="7">
+            {{proizvodi.Tip=='s'? proizvodi.Presadjivanje : proizvodi.Napredak}} dana
+          </td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-heart" style="color: rgb(0, 204, 255);"></i></td>
+          <td>
+            {{prosek}} / 5
+          </td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-users" style="color: rgb(0, 204, 255);"></i></td>
+          <td>
+            {{ duzina }}
+          </td>
+        </tr>
+      
+
+      </table>
+    </div>
+    <div class="col-md-3"> </div>
+  </div>
+  <div class="row"style="padding-top: 100px" >
+    <span style="text-decoration: wavy; font-size: larger; color: rgb(5, 174, 216);">KOMENTARI</span>
+    <span *ngIf='komentari!=[]' style="padding-left: 20px; padding-top: 52px; ; ">
+      <table class="table table-borderless" style="width: 350px;">
+        <tr *ngFor='let c of komentari;let in=index'>
+
+          <td>
+            <div class="card " style=" width:200px;  background-color: rgb(0, 204, 255) ; ">
+              <blockquote class="blockquote"  >
+                <p class="mb-0">{{c.Sadrzaj}}</p>
+              
+                <footer class="blockquote-footer text-white" style="text-align: center;"> {{c.Polj}} </footer>
+              </blockquote>
+            </div>
+          </td>
+
+
+
+        </tr>
+      </table>
+    </span>
+    <span *ngIf="komentari[0]==null  || komentari==[] ">
+      <br>
+      <div style="color:  rgb(0, 204, 255);; font-size: larger; font-weight: bolder; ">Nema komentara za ovaj proizvod!</div>
+    </span>
+  </div>
+
+  <i class="fa fa-industry fa-3x" style="color: rgb(3, 145, 180); float: right; padding-bottom: 30px;" (click)='nazad()'></i>
+
+</div>

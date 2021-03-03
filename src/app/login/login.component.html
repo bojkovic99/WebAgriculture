@@ -1,0 +1,67 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class=" container-fluid firstRow">
+    <div class="row">
+        <div class='col-lg-12'>
+            <a routerLink="/registracija">Registracija</a>
+            <input type="button" class="btn btn-link link" value="">
+        </div>
+    </div>
+</div>
+
+
+
+<div class=' container-fluid pozadina ' align="center" style="margin-bottom: 0px;">
+    <div class="row klasa">
+        <div class="col-lg-4"></div>
+        <div class='col-lg-4'>
+            <div class="card fse" style="width: max-content;" align="center">
+                <div class="card-body">
+                    <form id="prijaviSe" method="POST">
+                        <table class="table table-borderless" style="color:black">
+                            <tr>
+                                <td>Korisničko ime</td>
+                                <td>
+                                    <input type="text" class="form-control" name="username" [(ngModel)]="username"
+                                        size="25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lozinka</td>
+                                <td>
+                                    <input type="password" class="form-control" name="password" [(ngModel)]="password"
+                                        size="25">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" align="center">
+
+                                    &nbsp; &nbsp;&nbsp;
+                                    <input type="submit" class="btn btn-light" value="Prijavi se" (click)="logovanje()">
+                                </td>
+
+                            </tr>
+
+
+                        </table>
+                    </form>
+                    <span class="row" class="poruka">
+                        {{poruka}}
+                    </span>
+
+
+
+                </div>
+            </div>
+
+            <br>
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
