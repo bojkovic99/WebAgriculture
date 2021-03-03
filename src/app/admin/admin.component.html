@@ -1,0 +1,312 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class='col-sm-4  prva'>
+
+        </div>
+        <div class='col-sm-8 boja'>
+            <a routerLink="/login">Odjava</a> |
+            <a routerLink='/promena'>Promeni šifru</a>
+        </div>
+    </div>
+    <div class="row firstRow ">
+        <div class='col-lg-12'>
+            <form>
+
+                <button class="btn btn-link link" (click)='pristigli()'>Pregled pristiglih zahteva</button>
+                <button class="btn btn-link link" (click)='dodaj()'>Pregled korisnika</button>
+                <button class="btn btn-link link" (click)='registrujKW()'>Dodaj Poljoprivrednika</button>
+                <button class="btn btn-link link" (click)='registrujPW()'>Dodaj Preduzeće</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class='container-fluid pozadina'>
+    <div class="row">
+        <div class='col-md-12' align="center">
+            <span *ngIf="prist=='2'">
+                Pristigli zahtevi:
+                <table align="center" class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Korisničko ime</th>
+                            <th>Tip korisnika</th>
+                            <th>Puno Ime</th>
+                            <th>Datum osnivanje</th>
+                            <th>Mesto</th>
+                            <th>Email</th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of pom2; let i=index">
+                            <td *ngIf="a.Prihvacen=='n'">{{a.KorIme}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">Preduzeće</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.PunoIme}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.Datum}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.Mesto}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.Email}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">
+                                <button class='btn btn-success' (click)="prihvati(i,1)">Prihvati</button>
+                            </td>
+                            <td *ngIf="a.Prihvacen=='n'">
+                                <button class='btn btn-danger' (click)="odbaci1(a,1)">Odbaci</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Korisničko ime</th>
+                            <th>Tip</th>
+                            <th>Ime</th>
+                            <th>Prezime </th>
+                            <th>Datum rođenja </th>
+                            <th>Mesto rođenja</th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of pom1; let i=index">
+                            <td *ngIf="a.Prihvacen=='n'">{{a.KorIme}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">Poljoprivrednik</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.Ime}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.Prezime}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.DatumRodjenja}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.MestoRodjenja}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.Telefon}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">{{a.Email}}</td>
+                            <td *ngIf="a.Prihvacen=='n'">
+                                <button class='btn btn-success' (click)="prihvati(i,2)">Prihvati</button>
+                            </td>
+                            <td *ngIf="a.Prihvacen=='n'">
+                                <button class='btn btn-danger' (click)="odbaci2(a,2)">Odbaci</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-md-12'>
+            <span *ngIf="prist=='3'">
+                Preduzeća:
+                <form>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Korisničko ime</th>
+                                <th>Puno ime</th>
+                                <th>Email</th>
+                                <th>Datum</th>
+                                <th>Mesto</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of niz1; let i=index">
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz1[i].KorIme}}"
+                                        [(ngModel)]="a.KorIme" disabled=true></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz1[i].PunoIme}}"
+                                        [(ngModel)]="niz1[i].PunoIme"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz1[i].Email}}"
+                                        [(ngModel)]="a.Email"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz1[i].Datum}}"
+                                        [(ngModel)]="a.Datum"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz1[i].Mesto}}"
+                                        [(ngModel)]="a.Mesto"></td>
+                                <td *ngIf="a.Prihvacen=='y'">
+                                    <button class='btn btn-success' (click)="azuriraj1(niz1[i])">Azuriraj</button>
+                                </td>
+                                <td *ngIf="a.Prihvacen=='y'">
+                                    <button class='btn btn-danger' (click)="odbaci1(a,1)">Ukloni</button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                Poljoprivrednici:
+                <form>
+                    <table class="table table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Korisničko ime</th>
+                                <th>Ime</th>
+                                <th>Prezime </th>
+                                <th>Datum rodjenja </th>
+                                <th>Mesto rođenja</th>
+                                <th>Telefon</th>
+                                <th>Email</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of niz2; let i=index">
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz2[i].KorIme}}"
+                                        [(ngModel)]="a.KorIme" disabled=true></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz2[i].Ime}}"
+                                        [(ngModel)]="niz2[i].Ime"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz2[i].Prezime}}"
+                                        [(ngModel)]="niz2[i].Prezime"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz2[i].DatumRodjenja}}"
+                                        [(ngModel)]="a.DatumRodjenja"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz2[i].MestoRodjenja}}"
+                                        [(ngModel)]="a.MestoRodjenja"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz2[i].Telefon}}"
+                                        [(ngModel)]="a.Telefon"></td>
+                                <td *ngIf="a.Prihvacen=='y'"><input type="text" name="{{niz2[i].Email}}"
+                                        [(ngModel)]="a.Email"></td>
+                                <td *ngIf="a.Prihvacen=='y'">
+                                    <button class='btn btn-success' (click)="azuriraj2(niz2[i])">Azuriraj</button>
+                                </td>
+                                <td *ngIf="a.Prihvacen=='y'">
+                                    <button class='btn btn-danger' (click)="odbaci2(niz2[i],2)">Ukloni</button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div clas="col-lg-3"></div>
+        <div class='col-lg-6'>
+            <form>
+                <span *ngIf="prist=='4'">
+                    <table class="table" align="center">
+                        <tr>
+                            <td>Pun naziv preduzeća</td>
+                            <td>
+                                <input class="form-control" type="text" name="ppunoime" [(ngModel)]="ppunoime" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Skraćeni naziv preduzeća</td>
+                            <td>
+                                <input class="form-control" type="text" name="pusername" [(ngModel)]="pusername"
+                                    required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lozinka</td>
+                            <td>
+                                <input class="form-control" type="password" name="psifra1" [(ngModel)]="psifra1"
+                                    required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Datum osnivanja</td>
+                            <td size="30">
+                                <input class="form-control" type="date" name="pdatum" [(ngModel)]="pdatum" size="30">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesto</td>
+                            <td>
+                                <input class="form-control" type="string" name="pmesto" [(ngModel)]="pmesto">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input class="form-control" type="email" name="pmail" [(ngModel)]="pmail">
+                            </td>
+                        </tr>
+                        <tr colspan="2" align="right">
+                            <button (click)="registrujP()" class="btn btn-secondary">Dodaj</button>
+                        </tr>
+                    </table>
+
+                </span>
+
+
+                <span *ngIf="prist=='5'">
+                    <table class="table">
+                        <tr>
+                            <td>Ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kime" [(ngModel)]="kime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prezime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kprezime" [(ngModel)]="kprezime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Korisničko ime</td>
+                            <td>
+                                <input class="form-control" type="text" name="kusername" [(ngModel)]="kusername">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lozinka</td>
+                            <td>
+                                <input class="form-control" type="password" name="ksifra1" [(ngModel)]="ksifra1">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Datum rođenja</td>
+                            <td>
+                                <input class="form-control" type="date" name="datum" [(ngModel)]="kdatum">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesto rođenja</td>
+                            <td>
+                                <input class="form-control" type="string" name="mesto" [(ngModel)]="kmesto">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Telefon</td>
+                            <td>
+                                <input class="form-control" type="tel" name="telefon" [(ngModel)]="ktelefon">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input class="form-control" type="email" name="mail" [(ngModel)]="kmail">
+                            </td>
+                        </tr>
+                        <tr colspan="2" style="float: right; ">
+                            <button (click)="registrujK()" class="btn btn-secondary">Dodaj</button>
+                        </tr>
+                    </table>
+                </span>
+
+
+                <span class="poruka">
+                    {{msg}}
+                </span>
+                <span class="uspeh">
+                    {{poruka}}
+                </span>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>

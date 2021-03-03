@@ -1,0 +1,65 @@
+.poc{
+    padding: 10px;
+}
+.firstRow{
+    /* background-color: rgb(105, 214, 241); */
+    
+    text-align: left;
+    background-color: rgb(4, 44, 77);
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#nav{
+    background-color: #626262;
+}
+
+#menu{
+    text-align: right;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+
+    background-color: rgb(183, 216, 243);
+    padding-bottom: 500px;
+    color: white;
+}
+
+.poruka{
+    font-weight: bold;
+    font-size: large;
+    color: red;
+
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+a:hover{
+    color:white;
+    font-size: 21px;
+}
+
+.centar
+{
+    align-items: center;
+    align-self: center;
+    align-content: center;
+
+}
+
+.boja
+{
+    background-color: rgb(19, 89, 146);
+}
+
+.obican
+{
+    font-size: large;
+    color: rgb(17, 29, 39);
+}
